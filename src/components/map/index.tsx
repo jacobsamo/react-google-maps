@@ -71,6 +71,7 @@ export type MapProps = PropsWithChildren<
       /**
        * An id for the map, this is required when multiple maps are present
        * in the same APIProvider context.
+       * This ID will also be applied as the HTML `id` attribute on the map's DOM element.
        */
       id?: string;
 
@@ -225,13 +226,17 @@ export const Map: FunctionComponent<MapProps> = (props: MapProps) => {
     );
   }
 
+  console.log('Rendering Map with context value', {
+    mapRef: JSON.stringify(mapRef)
+  });
+
   return (
     <div
       ref={mapRef}
       data-testid={'map'}
       style={className ? undefined : combinedStyle}
       className={className}
-      {...(id ? {id} : {})}>
+      id={id ? `${id}-container` : 'default-container'}>
       {map ? (
         <GoogleMapsContext.Provider value={contextValue}>
           {children}

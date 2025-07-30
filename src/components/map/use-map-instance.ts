@@ -135,6 +135,7 @@ export function useMapInstance(
         setTimeout(() => map.setCenter(map.getCenter()!), 0);
       } else {
         mapDiv = document.createElement('div');
+        mapDiv.id = id ? `${id}-map` : 'default-map';
         mapDiv.style.height = '100%';
         container.appendChild(mapDiv);
 
